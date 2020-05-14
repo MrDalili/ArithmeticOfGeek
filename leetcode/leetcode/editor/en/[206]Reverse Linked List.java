@@ -42,29 +42,25 @@
  */
 class Solution {
     public static ListNode reverseList(ListNode head) {
-        //先进行边界运算
-        if (head == null)
-            return null;
-        return reverse(head).get(0);
+//        //先进行边界运算
+//        if (head == null)
+//            return null;
+//        return reverse(head).get(0);
+        //return reversListIntRecursion(head,null);
+        return reversListIntIteration(head,null);
     }
 
-    public static List<ListNode> reverse(ListNode head) {
-
-        //出口，当没有下一个元素额时候
-        if (head.next == null){
-            return Arrays.asList(head,head);
+    public static ListNode reversListIntIteration(ListNode head ,ListNode newHead){
+        while (true){
+            if (head == null){
+                break;
+            }
+            ListNode newList = head.next;
+            head.next = newHead;
+            newHead = head;
+            head = newList;
         }
-        //先把当前的元素拿出来，这个元素现在看起来是第一个，但是起使它是最后一个，因为要颠倒你知道吗
-//        ListNode lastNode = head;
-//        lastNode.next = null;
-        ListNode lastNode = new ListNode(head.val);
-        //把需要改的传进去，第一个存放的是首节点，第二个存放的是倒数节点
-        List<ListNode> myResult = reverse(head.next);
-        //看看是不是最后一个节点
-        //不是的话，那么第二个就会是最后一个节点
-        myResult.get(1).next = lastNode;
-        return Arrays.asList(myResult.get(0),lastNode);
+        return newHead;
     }
-
 }
 //leetcode submit region end(Prohibit modification and deletion)

@@ -50,7 +50,22 @@ public class ReverseList {
 //        if (head == null)
 //            return null;
 //        return reverse(head).get(0);
-        return reversListInt(head,null);
+        //return reversListIntRecursion(head,null);
+        return reversListIntIteration(head,null);
+    }
+
+    public static ListNode reversListIntIteration(ListNode head ,ListNode newHead){
+
+        while (true){
+            if (head == null){
+                break;
+            }
+            ListNode newList = head.next;
+            head.next = newHead;
+            newHead = head;
+            head = newList;
+        }
+        return newHead;
     }
 
     /**
@@ -58,13 +73,13 @@ public class ReverseList {
      * @param head
      * @return
      */
-    public static ListNode reversListInt(ListNode head ,ListNode newHead){
+    public static ListNode reversListIntRecursion(ListNode head ,ListNode newHead){
         if (head == null){
             return newHead;
         }
         ListNode newNode = head.next;
         head.next = newHead;
-        return reversListInt(newNode,head);
+        return reversListIntRecursion(newNode,head);
     }
 
     public static List<ListNode> reverse(ListNode head) {
